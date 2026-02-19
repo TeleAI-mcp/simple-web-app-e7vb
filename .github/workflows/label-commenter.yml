@@ -1,0 +1,43 @@
+name: Label Commenter
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add comment for documentation label
+        if: contains(github.event.issue.labels.*.name, 'documentation')
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Thank you for flagging this documentation issue. We will update it soon.'
+            })
+      - name: Add comment for enhancement label
+        if: contains(github.event.issue.labels.*.name, 'enhancement')
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Thanks for the enhancement suggestion! We appreciate your input.'
+            })
+      - name: Add comment for feature label
+        if: contains(github.event.issue.labels.*.name, 'feature')
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Thank you for the feature request. We will consider including this in a future release.'
+            })
