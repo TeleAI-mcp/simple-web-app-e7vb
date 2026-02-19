@@ -1,2 +1,3 @@
-# simple-web-app-e7vb
-Automated issue comment bot repository
+# Simple Web App E7Vb
+
+Automated issue comment bot repository.
